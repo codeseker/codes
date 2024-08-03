@@ -1,0 +1,12 @@
+Recursion steps 
+1) Express everything in terms of index 
+2) Do all Possible stuff on current index 
+3) Find the desired output (min, max) or count ways 
+4) Base case (Always go from N to 0) 
+
+Recursion to Memoization 
+1) Creater dp array dimension depend on changing variables
+2) Store recrusive answer before returning into dp 
+3) after base case add dp base case 
+
+Some Question with their memo code

@@ -1,0 +1,88 @@
+constant window pattern
+arr = [-1, 2, 3, 3, 4, 5, -1]
+find mx sum of size window k = 4
+
+[-1, 2, 3, 3] -> fist window
+[2, 3, 3, 4] -> second window
+[3, 3, 4, 5] -> third window
+[3, 4, 5, -1] -> fourth window
+max sum of first window = 12
+
+we cn clearly see one element is inserting from left and other element is adding from right
+
+steps -> process first K size window and put l at start and r at end
+while (r < n - 1)
+{
+    sum -= arr[l];
+    l++;
+    r++;
+    sum += arr[r];
+    mxSum = max(mxSum, sum)
+}
+
+Next Pattern(Most Important) is Longest subarray/substring where <condition>
+Example: Longest subarray with sum <= 14
+[2, 5, 1, 7, 10] sum = 14
+this can be solved by soliving through 3 approach and always go stp by steps
+
+Brute -> Generate all the subarray 
+Better -> Using two ptr & sliding window 
+Optimal -> Optimizeed the upper one only
+
+For this problem Brute: 
+for(i=0 -> n-1) {
+    for(j=i -> n-1) {
+        sum = 0;
+        for(k=i -> j) {
+            sum += arr[k];
+            if(sum <= 14) {
+                maxLen = max(maxLen, j - i + 1);
+            }
+        }
+    }
+}
+
+For this better is: 
+l = 0, r = 0, mxLen = 0, sum = 0;
+while(r < n) {
+    sum += arr[r];
+    if(sum <= k) {
+        mxLen = max(mxLen, r - l + 1);
+    } else {
+        while(sum > k) {
+            sum -= sum[l];
+            l++;
+        }
+    }
+    r++;
+} TC -> O(N + N) -> because of this while loop
+
+For this Optimal is: 
+l = 0, r = 0, mxLen = 0, sum = 0;
+while(r < n) {
+    sum += arr[r];
+    if(sum <= k) {
+        mxLen = max(mxLen, r - l + 1);
+    } else {
+        sum > k
+        if(sum > k) {
+            just trim by one length because there is no need to have more than one
+            sum -= sum[l];
+            l++;
+        }
+    }
+    r++;
+} TC -> O(N)
+
+
+Next Pattern is: No. of subarray with condition -> will be solved using pattern 2
+
+Example: No. of subarray where sum = K
+to solve this:
+x => No. of Subarray where sum <= k  -> cnt
+y => No. of subarray where sum <= k-1 -> cnt
+ans => x - y;
+
+Next Pattern is: Shortes of Minimum subarray -> here shrinking will be our priority because to reduce the length
+
+
